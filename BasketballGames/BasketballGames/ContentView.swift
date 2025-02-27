@@ -25,29 +25,32 @@ struct ContentView: View {
     @State private var games: [BasketballGame] = []
     
     var body: some View {
-        List(games, id: \.id) { game in
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("\(game.team) vs. \(game.opponent)")
+        NavigationStack {
+            List(games, id: \.id) { game in
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("\(game.team) vs. \(game.opponent)")
+                        
+                        Text("\(game.date)")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                     
-                    Text("\(game.date)")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                
-                Spacer()
-
-                VStack(alignment: .trailing) {
-                    Text("\(game.score.unc) - \(game.score.opponent)")
-
-                    Text("\(game.isHomeGame ? "Home" : "Away")")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    Spacer()
+                    
+                    VStack(alignment: .trailing) {
+                        Text("\(game.score.unc) - \(game.score.opponent)")
+                        
+                        Text("\(game.isHomeGame ? "Home" : "Away")")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
-        }
-        .task {
-            await loadData()
+            .navigationTitle("UNC Basketball")
+            .task {
+                await loadData()
+            }
         }
     }
     
