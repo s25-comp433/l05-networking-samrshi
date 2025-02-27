@@ -55,7 +55,7 @@ struct ContentView: View {
     }
     
     func loadData() async {
-        guard let url = URL(string: "http://localhost:8080/uncbasketball") else {
+        guard let url = URL(string: "https://api.samuelshi.com/uncbasketball") else {
             print("Invalid URL")
             return
         }
