@@ -63,9 +63,8 @@ struct ContentView: View {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             
-            if let decodedResponse = try? JSONDecoder().decode([BasketballGame].self, from: data) {
-                games = decodedResponse
-            }
+            let decodedResponse = try JSONDecoder().decode([BasketballGame].self, from: data)
+            games = decodedResponse
         } catch {
             print("Invalid data")
         }
