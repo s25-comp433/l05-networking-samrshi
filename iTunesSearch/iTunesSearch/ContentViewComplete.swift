@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct iTunesSearchResponse: Codable {
-    var results: [iTunesSearchResult]
+struct iTunesSearchResponse2: Codable {
+    var results: [iTunesSearchResult2]
 }
 
-struct iTunesSearchResult: Codable {
+struct iTunesSearchResult2: Codable {
     var trackId: Int
     var trackName: String
     var collectionName: String
 }
 
-struct ContentView: View {
-    @State private var results = [iTunesSearchResult]()
+struct ContentView2: View {
+    @State private var results = [iTunesSearchResult2]()
     
     var body: some View {
         List(results, id: \.trackId) { item in
@@ -41,7 +41,7 @@ struct ContentView: View {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             
-            if let decodedResponse = try? JSONDecoder().decode(iTunesSearchResponse.self, from: data) {
+            if let decodedResponse = try? JSONDecoder().decode(iTunesSearchResponse2.self, from: data) {
                 results = decodedResponse.results
             }
         } catch {
